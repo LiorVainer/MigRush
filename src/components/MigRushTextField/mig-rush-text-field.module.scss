@@ -1,0 +1,35 @@
+@use '../../styles/utils' as Utils;
+@use '../../styles/theme' as Theme;
+
+.container {
+    position: relative;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    align-self: flex-start;
+    margin: 0;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.textfield {
+    @include Utils.inputReset();
+    @include Theme.grayScaleColor(0);
+    @include Theme.borderRadius();
+    background-color: Theme.primaryLight(1);
+    font-size: 24px;
+    font-weight: 100;
+    transition: all 0.2s ease-in-out;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+
+    &:focus {
+        background-color: Theme.primaryLight(3);
+    }
+}
