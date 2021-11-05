@@ -1,0 +1,52 @@
+$modifyColorAmount: 5;
+
+$primary: hsla(60, 12%, 85%, 1);
+$accent: hsla(258, 24%, 33%, 1);
+
+@function primaryDark($darknessAmount) {
+    @return darken(
+        $color: $primary,
+        $amount: $darknessAmount * $modifyColorAmount
+    );
+}
+
+@function primaryLight($lightnessAmount) {
+    @return lighten(
+        $color: $primary,
+        $amount: $lightnessAmount * $modifyColorAmount
+    );
+}
+
+@function accentDark($darknessAmount) {
+    @return darken(
+        $color: $primary,
+        $amount: $darknessAmount * $modifyColorAmount
+    );
+}
+
+@function accentLight($lightnessAmount) {
+    @return lighten(
+        $color: $accent,
+        $amount: $lightnessAmount * $modifyColorAmount
+    );
+}
+
+@mixin borderRadius {
+    border-radius: 10px;
+}
+
+@mixin grayScaleColor($amount) {
+    $black: hsla(0, 0%, 0%, 1);
+
+    color: lighten($black, $amount);
+}
+
+@mixin grayScaleBG($amount) {
+    $black: hsla(0, 0%, 0%, 1);
+
+    background-color: lighten($black, $amount);
+}
+
+@mixin appScreen {
+    background-color: $primary;
+}

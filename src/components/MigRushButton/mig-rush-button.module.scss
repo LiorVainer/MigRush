@@ -1,0 +1,23 @@
+@use '../../styles/theme' as Theme;
+@use '../../styles/utils' as Utils;
+
+.primaryButton {
+    @include Utils.flexSpaceBetween();
+    @include Theme.grayScaleColor(100);
+    @include Utils.buttonReset();
+    @include Theme.borderRadius();
+    padding: 1rem;
+    background-color: Theme.$accent;
+    box-sizing: border-box;
+
+    & > p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    &:hover {
+        background-color: Theme.accentDark(1);
+        transition: all 0.2s ease-in-out;
+    }
+}
