@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 import { MigRushButton } from '../../components/MigRushButton'
 import { MigRushTextField } from '../../components/MigRushTextField'
 
@@ -8,6 +11,11 @@ export interface HomePageProps {}
 export const HomePage: React.VFC<HomePageProps> = () => {
     return (
         <div className={classes.homePage}>
+            <MigRushButton
+                className={classes.backButton}
+                round
+                icon={faArrowLeft}
+            />
             <MigRushTextField
                 name="Event Name"
                 required

@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import classes from './mig-rush-text-field.module.scss'
 
 export interface MigRushTextFieldProps {
@@ -11,18 +13,18 @@ export const MigRushTextField: React.VFC<
             React.InputHTMLAttributes<HTMLInputElement>,
             HTMLInputElement
         >
-> = ({ name, required, ...props }) => {
+> = ({ name, required, className, style, ...props }) => {
     return (
-        <div className={classes.container}>
-            <p className={classes.header}>
-                {name} {required && ' *'}
-            </p>
+        <div className={clsx(classes.container, className)} style={style}>
             <input
                 type="text"
                 placeholder={`Enter a ${name.toLowerCase()}`}
                 className={classes.textfield}
                 {...props}
             />
+            <label className={classes.label}>
+                {name} {required && ' *'}
+            </label>
         </div>
     )
 }

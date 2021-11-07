@@ -3,19 +3,27 @@
 
 .container {
     position: relative;
-    margin: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
+    margin: 1rem;
 }
 
-.header {
+.label {
     align-self: flex-start;
     margin: 0;
-    margin-left: 2rem;
+    margin-left: 1rem;
     margin-bottom: 0.5rem;
     font-size: 16px;
     font-weight: 600;
+    transition: all 0.2s ease-in;
+    order: -1;
+}
+
+// Animation Of Label When Textfield is focus
+.textfield:focus + .label {
+    transform: translateX(-1rem);
 }
 
 .textfield {
@@ -25,9 +33,8 @@
     background-color: Theme.primaryLight(1);
     font-size: 24px;
     font-weight: 100;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in;
     padding: 1rem;
-    width: calc(100% - 2rem);
 
     &:focus {
         background-color: Theme.primaryLight(3);

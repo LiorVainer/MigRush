@@ -19,7 +19,7 @@ $accent: hsla(258, 24%, 33%, 1);
 
 @function accentDark($darknessAmount) {
     @return darken(
-        $color: $primary,
+        $color: $accent,
         $amount: $darknessAmount * $modifyColorAmount
     );
 }
@@ -49,4 +49,10 @@ $accent: hsla(258, 24%, 33%, 1);
 
 @mixin appScreen {
     background-color: $primary;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

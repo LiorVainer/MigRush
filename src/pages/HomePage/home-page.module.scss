@@ -3,3 +3,8 @@
 .homePage {
     @include Theme.appScreen();
 }
+
+.backButton {
+    align-self: flex-start;
+    margin-left: 2rem;
+}

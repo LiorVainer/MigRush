@@ -3,23 +3,46 @@ import {
     FontAwesomeIconProps,
 } from '@fortawesome/react-fontawesome'
 
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
+
+import clsx from 'clsx'
+
 import classes from './mig-rush-button.module.scss'
 
-export interface PrimaryButtonProps {
+export interface MigRushButtonProps extends Omit<FontAwesomeIconProps, 'icon'> {
     text?: string
-    fontSize?: number
-    faIconProps?: FontAwesomeIconProps
+    fontSize?: string
+    round?: boolean
+    rtl?: boolean
+    icon?: IconProp
 }
 
-export const MigRushButton: React.VFC<PrimaryButtonProps> = ({
+export const MigRushButton: React.VFC<MigRushButtonProps> = ({
     text,
     fontSize,
-    faIconProps,
+    icon,
+    round,
+    style,
+    className,
+    ...faIconProps
 }) => {
     return (
-        <button className={classes.primaryButton} style={{ fontSize }}>
+        <button
+            className={clsx(classes.migrushButton, className)}
+            style={
+                round
+                    ? {
+                          fontSize,
+                          width: '2.5rem',
+                          height: '2.5rem',
+                          borderRadius: '1.25rem',
+                          ...style,
+                      }
+                    : { fontSize, ...style }
+            }
+        >
             {text && <p>{text}</p>}
-            {faIconProps && <FontAwesomeIcon {...faIconProps} />}
+            {icon && <FontAwesomeIcon icon={icon} {...faIconProps} />}
         </button>
     )
 }
