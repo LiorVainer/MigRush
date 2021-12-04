@@ -1,0 +1,49 @@
+@use '../../styles/utils' as Utils;
+@use '../../styles/theme' as Theme;
+
+.autocomplete {
+    position: relative;
+}
+
+.resetSection {
+    @include Utils.flexCenter;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0.5rem;
+    box-sizing: border-box;
+}
+
+.resetButton {
+    @include Utils.buttonReset();
+}
+
+.suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    @include Theme.borderRadius();
+    @include Theme.grayScaleColor(100);
+    background-color: Theme.primaryDark(2);
+    position: fixed;
+}
+.suggestion {
+    @include Theme.borderRadius();
+    font-size: 1.2rem;
+    padding: 1rem;
+    &:hover {
+        background-color: Theme.primaryDark(4);
+    }
+}
+
+.suggestionActive {
+    background-color: Theme.primaryDark(4);
+}
+
+.noSuggestions {
+    @include Theme.grayScaleColor(100);
+    @include Theme.borderRadius();
+    background-color: Theme.primaryDark(2);
+    position: fixed;
+    padding: 1rem;
+}

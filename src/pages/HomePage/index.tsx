@@ -5,6 +5,7 @@ import { MigRushButton } from '../../components/MigRushButton'
 import { MigRushTextField } from '../../components/MigRushTextField'
 
 import classes from './home-page.module.scss'
+import { MigRushAutocomplete } from '../../components/MigRushAutocomplete'
 
 export interface HomePageProps {}
 
@@ -27,6 +28,10 @@ export const HomePage: React.VFC<HomePageProps> = () => {
                 placeholder="Select event type"
             />
             <MigRushTextField name="Description" />
+            <MigRushAutocomplete
+                name="test"
+                suggestions={['Oranges', 'Apples', 'Banana', 'Kiwi', 'Mango']}
+            />
             <MigRushButton text="Create Event" />
         </div>
     )
