@@ -1,7 +1,7 @@
 import { faPlus, faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../../public/logo.svg";
+import Logo from "../../assets/logo.svg";
 import classes from "./home-page.module.scss";
 
 export interface HomePageProps {}
