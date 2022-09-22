@@ -1,0 +1,247 @@
+@use "./colors" as c;
+@use "./buttons" as b;
+@use "./globals" as g;
+
+@mixin actionbar(
+  $color: c.$purple,
+  $childColor: c.$purple-dark,
+  $text: c.$purple-light,
+  $childText: c.$purple-light
+) {
+  background-color: $color;
+  :where(a) {
+    @include b.trans-button($color, $text);
+  }
+
+  :where(a.active) {
+    @include b.trans-button($childColor, $childText);
+    border-radius: 10px 10px 0 0;
+    cursor: default;
+    position: relative;
+
+    & > h1 {
+      z-index: 3000;
+    }
+
+    &:hover {
+      background-color: $childColor;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: transparent;
+      bottom: 0;
+      right: -50px;
+      height: 10px;
+      width: 50px;
+      border-bottom-left-radius: 10px;
+      box-shadow: -25px 0 0 0 $childColor;
+    }
+
+    &::after {
+      z-index: 10;
+
+      content: "";
+      position: absolute;
+      background-color: transparent;
+      bottom: 0;
+      left: -50px;
+      height: 10px;
+      width: 50px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 25px 0 0 0 $childColor;
+    }
+  }
+}
+
+@mixin table($radius: 0.2rem, $row-height: g.$layout-header) {
+  width: 100%;
+  border-spacing: 0 0.5rem;
+  display: grid;
+  // grid-template-rows: $row-height auto $row-height;
+  thead {
+    background-color: c.$purple-light;
+
+    display: flex;
+    align-items: center;
+    padding: {
+      block: 1rem;
+      inline: 1rem;
+    }
+    tr {
+      th {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  tbody {
+    tr {
+      background-color: c.$purple-lighter;
+      height: $row-height;
+      box-sizing: border-box;
+      padding: {
+        inline: 1rem;
+      }
+      transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+      td {
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+        & > * {
+          height: 100%;
+          width: 100%;
+        }
+
+        &:last-child {
+          border-left: none;
+        }
+      }
+      &:nth-child(even) {
+        background-color: darken(c.$purple-lighter, 2);
+      }
+
+      &:hover {
+        background-color: darken(c.$purple-lighter, 5);
+      }
+
+      &:active {
+        background-color: darken(c.$purple-lighter, 10);
+      }
+    }
+  }
+  tfoot {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    direction: ltr;
+    // height: 5%;
+  }
+
+  @media (max-width: 800px) {
+    thead > tr > th {
+      line-height: 1rem;
+    }
+  }
+}
+
+@mixin list-item(
+  $container: (
+    "border": 0.15rem solid rgba(c.$purple, 0.2),
+    "radius": 0.2rem,
+    "padding": 1vh 0,
+  ),
+  $colors: (
+    "background": c.$purple-light,
+    "text": c.$purple-dark,
+  ),
+  $direction: rtl,
+  $clickable: true
+) {
+  direction: $direction;
+  border-radius: g.accessor($container, "radius");
+  padding: g.accessor($container, "padding");
+
+  * {
+    width: 100%;
+    border-left: g.accessor($container, "border");
+    &:nth-last-child(1) {
+      border-left: none;
+    }
+  }
+
+  button {
+    @include b.trans-button(
+      darken(g.accessor($colors, "background"), 15%),
+      darken(g.accessor($colors, "text"), 10%)
+    );
+    border-left: none;
+    border-radius: 0.2rem;
+  }
+
+  background-color: g.accessor($colors, "background");
+  color: g.accessor($colors, "text");
+
+  &:nth-child(even) {
+    background-color: darken(purple, 5%);
+  }
+
+  @if $clickable {
+    @include b.trans-button(
+      g.accessor($colors, "background"),
+      g.accessor($colors, "text")
+    );
+  }
+}
+
+// @mixin list(
+//     $header: (
+//         'align': center,
+//         'font-weight': 600,
+//         'padding': (
+//             'block': 1vh,
+//             'inline': 0.2rem,
+//         ),
+//     ),
+//     $footer: (
+//         'gap': 0.3rem,
+//         'color': (
+//             'background': c.$purple-light,
+//             'text': c.$purple-dark,
+//         ),
+//         'round': 0.2rem,
+//     ),
+//     $direction: rtl,
+//     $gap: 1vh,
+//     $padding-block: 0.5vh
+// ) {
+//     direction: $direction;
+
+//     header {
+//         justify-items: g.accessor($header, 'align');
+//         font-weight: g.accessor($header, 'font-weight');
+//         padding: {
+//             block: g.accessor($header, 'padding', 'block');
+//             inline: g.accessor($header, 'padding', 'inline');
+//         }
+//     }
+
+//     main {
+//         @if $direction == rtl {
+//             direction: ltr;
+//         } @else {
+//             direction: rtl;
+//         }
+
+//         gap: $gap;
+//     }
+
+//     footer {
+//         @if direction == ltr {
+//             justify-content: flex-start;
+
+//             svg {
+//                 transform: scaleX(1);
+//             }
+//         }
+
+//         gap: g.accessor($footer, 'gap');
+
+//         button,
+//         select,
+//         span {
+//             @include b.trans-button(
+//                 map-get(g.accessor($footer, 'color'), 'background'),
+//                 map-get(g.accessor($footer, 'color'), 'text')
+//             );
+//             @include g.roundie(g.accessor($footer, 'round'));
+//         }
+//     }
+// }

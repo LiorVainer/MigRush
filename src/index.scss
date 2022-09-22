@@ -1,0 +1,13 @@
+@use "../src/theme/theme" as *;
+@include css-reset;
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: "Assistant", sans-serif;
+}

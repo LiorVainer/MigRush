@@ -1,0 +1,58 @@
+@use "./colors" as *;
+@use "./globals" as *;
+
+@mixin mui-accordion() {
+  background-color: $purple-lighter;
+  border-radius: 0.2rem !important;
+
+  p {
+    color: $purple-darker;
+    @include font;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  & > div {
+    min-height: 0;
+    padding: {
+      inline: 1rem;
+    }
+    & > div {
+      padding: {
+        top: 0.6rem;
+        bottom: 0.2rem;
+      }
+      margin: 0;
+    }
+
+    & > div:nth-child(2) {
+      padding: 0;
+      margin-bottom: -0.2rem;
+    }
+  }
+
+  div[role="region"] {
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0;
+      padding-bottom: 0.8rem;
+    }
+  }
+
+  .item {
+    background-color: $purple-light;
+  }
+
+  &::before {
+    display: none;
+  }
+
+  @media (max-width: 800px) {
+    & > div {
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

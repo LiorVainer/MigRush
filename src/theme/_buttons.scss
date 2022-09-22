@@ -1,0 +1,81 @@
+@use "./globals" as g;
+@use "./colors" as c;
+
+@mixin base-button($back: c.$purple-dark, $text: c.$purple-light) {
+  @include g.font;
+
+  border: none;
+  cursor: pointer;
+  color: $text;
+  background-color: $back;
+
+  &:disabled {
+    cursor: not-allowed !important;
+    background-color: lightgrey !important;
+  }
+}
+
+@mixin outline-button($back: c.$purple-dark, $text: c.$light) {
+  @include base-button($back, $text);
+
+  border: 0.13rem solid $text;
+  transition: all 0.2s ease;
+
+  &:hover {
+    // border-color: darken($text, 20);
+    color: $back;
+    background-color: $text;
+  }
+
+  &:active {
+    border-color: transparent;
+    color: $text;
+    background-color: desaturate(darken($text, 50), 60);
+  }
+}
+
+@mixin trans-button($back: c.$purple-dark, $text: c.$purple-light) {
+  @include base-button($back, $text);
+  // transition: all 0.2s ease;
+
+  &:hover {
+    background-color: darken($back, 10);
+  }
+
+  &:active {
+    background-color: darken($back, 20);
+  }
+}
+
+@mixin icon-button($back: c.$purple-dark, $text: c.$purple-light) {
+  @include trans-button($back, $text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // aspect-ratio: 1;
+}
+
+@mixin text-icon-button($back: c.$purple-dark, $text: c.$purple-light) {
+  @include trans-button($back, $text);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: {
+    inline: 1rem;
+  }
+}
+
+@mixin regular-button($back: c.$purple-dark, $text: c.$purple-light) {
+  @include trans-button($back, $text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.2rem;
+  gap: 1rem;
+  padding: {
+    block: 0.5rem;
+    inline: 1rem;
+  }
+  max-width: 10rem;
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}

@@ -1,0 +1,25 @@
+$purple-darker: hsl(258, 24%, 15%);
+$purple-dark: hsl(258, 24%, 25%);
+$purple: hsl(258, 24%, 35%);
+$purple-light: hsl(258, 24%, 45%);
+$purple-lighter: hsl(258, 24%, 55%);
+
+$error: hsla(0, 84%, 64%, 1);
+
+@mixin general-colors {
+  color: $purple-darker;
+}
+
+@function gray-scale($lightness, $opacity: 1) {
+  @return hsla(0, 0%, $lightness * 1%, $opacity);
+}
+
+:export {
+  grayScale: gray-scale;
+  purpleDarker: $purple-darker;
+  purpleDark: $purple-dark;
+  purple: $purple;
+  purpleLight: $purple-light;
+  purpleLighter: $purple-lighter;
+  error: $error;
+}

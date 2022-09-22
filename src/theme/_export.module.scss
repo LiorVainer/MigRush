@@ -1,0 +1,10 @@
+@use "../theme/colors" as colors;
+
+:export {
+  purpleDarker: colors.$purple-darker;
+  purpleDark: colors.$purple-dark;
+  purple: colors.$purple;
+  purpleLight: colors.$purple-light;
+  purpleLighter: colors.$purple-lighter;
+  error: colors.$error;
+}

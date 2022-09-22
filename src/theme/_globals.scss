@@ -1,0 +1,37 @@
+$layout-header: 5.2vh;
+
+@mixin font {
+    font-family: 'Assistant', sans-serif;
+}
+
+@mixin centerflex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin default-container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: $layout-header auto;
+}
+
+@mixin sidebar-container {
+    display: grid;
+    grid-template-columns: 20% auto;
+    height: 100%;
+}
+
+@mixin roundie($much-round: '.3rem') {
+    border-radius: $much-round;
+}
+
+@function accessor($value, $keys...) {
+    $newValue: $value;
+
+    @each $key in $keys {
+        $newValue: map-get($value, $key);
+    }
+
+    @return $newValue;
+}
