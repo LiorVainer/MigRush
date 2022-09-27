@@ -1,0 +1,27 @@
+@use "../../theme/theme" as *;
+
+.steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.step {
+  color: $purple-dark;
+  border: 1px solid $purple;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 1rem;
+}
+
+.current {
+  color: white;
+  background-color: $purple-dark;
+}

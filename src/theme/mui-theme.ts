@@ -23,11 +23,4 @@ export const theme = createTheme({
   },
 });
 
-export type MuiColorOptions =
-  | "error"
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | undefined;
+export type MuiColorOptions = "error" | "primary" | "secondary" | "info" | "success" | "warning" | undefined;

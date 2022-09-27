@@ -1,0 +1,21 @@
+@use "../../theme/theme" as *;
+
+.container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $purple;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

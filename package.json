@@ -13,7 +13,10 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/moment": "^2.13.0",
     "antd": "^4.23.2",
+    "clsx": "^1.2.1",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0"
@@ -22,6 +25,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
+    "agrippa": "^2.0.0",
     "sass": "^1.54.9",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
