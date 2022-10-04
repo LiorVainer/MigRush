@@ -1,12 +1,17 @@
-import { Participant } from "./participant.model";
+import { z } from "zod";
+import { EventType } from "../constants/event.const";
+import { zodDate } from "../types/date.types";
+import { ParticipantSchema } from "./participant.model";
 
-export interface Event {
-  title: string;
-  participants: Participant[];
-  location: string;
-  description?: string;
-  date: Date;
-  time: string;
-  type: string;
-  participantsAmountRange?: [number, number];
-}
+export const EventSchema = z.object({
+  title: z.string(),
+  participants: z.array(ParticipantSchema),
+  location: z.tuple([z.number(), z.number()]),
+  description: z.string().optional(),
+  date: zodDate,
+  time: z.string(),
+  type: z.nativeEnum(EventType),
+  participantsAmountRange: z.tuple([z.number(), z.number()]).optional(),
+});
+
+export type Event = z.infer<typeof EventSchema>;

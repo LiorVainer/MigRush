@@ -1,34 +1,21 @@
-import { Input } from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import { Field, useFormikContext } from "formik";
 import { useState } from "react";
 import { AutocompleteWrapper } from "../../../components/AutocompleteWrapper/AutocompleteWrapper";
+import { Input } from "../../../components/Form/Input";
+import { RadioGroup } from "../../../components/Form/RadioGroup";
+import { TextArea } from "../../../components/Form/TextArea";
 import { EventFormLabels, EventFormPlaceHolders, EventType } from "../../../constants/event.const";
+import { enumToRadioGroupOptions } from "../../../utils/form/radioGroup.utils";
 import classes from "./first-step.module.scss";
 
 export interface FirstStepProps {}
 
 export const FirstStep: React.FC<FirstStepProps> = () => {
-  const [value, setValue] = useState("");
   return (
     <>
-      <div className={classes.field}>
-        <span>{EventFormLabels.title}</span>
-        <Input required allowClear />
-      </div>
-      <div className={classes.field}>
-        <p>{EventFormLabels.type}</p>
-        <AutocompleteWrapper
-          setValue={setValue}
-          value={value}
-          options={Object.values(EventType)}
-          strictStatus
-          allowClear
-        />
-      </div>
-      <div className={classes.field}>
-        <p>{EventFormLabels.description}</p>
-        <TextArea rows={4} required allowClear placeholder={EventFormPlaceHolders.description} />
-      </div>
+      <Input label={EventFormLabels.title} required name="title"></Input>
+      <RadioGroup label={EventFormLabels.type} required name="type" options={enumToRadioGroupOptions(EventType)} />
+      <TextArea label={EventFormLabels.description} name="description" rows={4} maxLength={100} showCount />
     </>
   );
 };

@@ -1,6 +1,5 @@
-import { faArrowLeft, faArrowRight, faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
+import { FormikProvider } from "formik";
+
 import { StepsNavigation } from "../../components/StepsNavigation";
 
 import classes from "./create-event-page.module.scss";
@@ -9,16 +8,18 @@ import { useCreateEventSteps } from "./useCreateEventSteps.hooks";
 export interface CreateEventPageProps {}
 
 export const CreateEventPage: React.FC<CreateEventPageProps> = () => {
-  const { StepsComponent, ContentComponent, navigation } = useCreateEventSteps();
+  const { StepsComponent, ContentComponent, navigation, formik } = useCreateEventSteps();
+
+  console.log(formik.errors);
 
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>New Event</h1>
-      <div className={classes.form}>
+      <FormikProvider value={formik}>
         <ContentComponent />
-      </div>
-      <StepsComponent />
-      <StepsNavigation navigation={navigation} />
+        <StepsComponent />
+        <StepsNavigation navigation={navigation} />
+      </FormikProvider>
     </div>
   );
 };

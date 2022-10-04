@@ -1,0 +1,19 @@
+@use "../../../theme/theme" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.error {
+  color: $error;
+}
+
+.requiredMark {
+  color: $error;
+}
+
+.label {
+  color: $purple-dark;
+}

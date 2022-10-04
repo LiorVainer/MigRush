@@ -34,7 +34,10 @@ export const StepsNavigation: React.FC<StepsNavigationProps> = ({ navigation }) 
       {done.show && (
         <button
           className={clsx(classes.btn, classes.next)}
-          onClick={done.do as React.MouseEventHandler<HTMLButtonElement>}
+          onClick={(e) => {
+            e.preventDefault();
+            done.do();
+          }}
         >
           <span>Done</span>
           <FontAwesomeIcon icon={faCheck} />

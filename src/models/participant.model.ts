@@ -1,7 +1,10 @@
-import { Status } from "./status.model";
+import { z } from "zod";
+import { Status, StatusEnum } from "./status.model";
 
-export interface Participant {
-  name: string;
-  status: Status;
-  img?: string;
-}
+export const ParticipantSchema = z.object({
+  name: z.string(),
+  status: z.nativeEnum(StatusEnum),
+  img: z.string().optional(),
+});
+
+export type Participant = z.infer<typeof ParticipantSchema>;

@@ -1,10 +1,11 @@
-import { AutoComplete, AutoCompleteProps } from "antd";
 import { DefaultOptionType } from "antd/lib/select";
+import { AutoComplete, AutoCompleteProps } from "formik-antd";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { EventType } from "../../constants/event.const";
-import { createOptionsFromStringArray } from "../../utils/autocomplete.utils";
+import { createOptionsFromStringArray } from "../../utils/form/autocomplete.utils";
 
 export interface AutocompleteWrapperProps extends Omit<AutoCompleteProps, "options"> {
+  name: string;
   options: string[];
   setValue: React.Dispatch<React.SetStateAction<string>>;
   value?: string;
@@ -16,6 +17,7 @@ export const AutocompleteWrapper: React.FC<AutocompleteWrapperProps> = ({
   value,
   strictStatus,
   setValue,
+  name,
   ...props
 }) => {
   const [acOptions, setAcOptions] = useState<{ value?: string; label: string }[]>(
@@ -39,5 +41,14 @@ export const AutocompleteWrapper: React.FC<AutocompleteWrapperProps> = ({
     [options, strictStatus]
   );
 
-  return <AutoComplete status={status} options={acOptions} onChange={onChange} onSearch={handleSearch} {...props} />;
+  return (
+    <AutoComplete
+      name={name}
+      status={status}
+      options={acOptions}
+      onChange={onChange}
+      onSearch={handleSearch}
+      {...props}
+    />
+  );
 };
