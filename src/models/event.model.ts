@@ -9,7 +9,7 @@ export const EventSchema = z.object({
   location: z.tuple([z.number(), z.number()]),
   description: z.string().optional(),
   date: zodDate,
-  time: z.string(),
+  time: zodDate,
   type: z.nativeEnum(EventType),
   participantsAmountRange: z.tuple([z.number(), z.number()]).optional(),
 });

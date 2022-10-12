@@ -2,8 +2,8 @@ import { message } from "antd";
 import { FormikValues, useFormik, FormikHelpers } from "formik";
 import { useCallback, useMemo, useState } from "react";
 import { Steps } from "../../components/Steps";
-import { newEventValues } from "../../constants/event.const";
-import { EventSchema } from "../../models/event.model";
+import { FirstStepEventSchema, newEventInitialValues, SecondStepEventSchema } from "../../constants/event-form.const";
+import { validateForm as validateAndSubmitForm } from "../../utils/formik/validate.utils";
 import { ZodFormikSchemaAdapter } from "../../utils/zod.utils";
 import { FirstStep } from "./FirstStep";
 import { SecondStep } from "./SecondStep";
@@ -20,35 +20,30 @@ export const steps = [
 ];
 
 export const useCreateEventSteps = () => {
+  const validationSchemas = {
+    [0]: ZodFormikSchemaAdapter(FirstStepEventSchema),
+    [1]: ZodFormikSchemaAdapter(SecondStepEventSchema),
+  };
+
+  const [current, setCurrent] = useState(0);
+  const validationScheam = useMemo(() => validationSchemas[current as 0 | 1], [current]);
+
   const formik = useFormik({
-    initialValues: newEventValues,
-    validationSchema: ZodFormikSchemaAdapter(EventSchema),
+    initialValues: newEventInitialValues,
+    validationSchema: validationScheam,
     onSubmit: function (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>): void | Promise<any> {
+      message.success("Success");
       throw new Error("Function not implemented.");
     },
   });
 
-  const [current, setCurrent] = useState(0);
-
   const nextFunction = useCallback(async () => {
-    const validationsPromises = steps
-      .filter((_, index) => index === current)[0]
-      .fields?.map(async (field) => {
-        return formik.validateField(field);
-      });
+    const { isValid } = await validateAndSubmitForm(formik);
 
-    const valid = await formik.validateField("title");
-    console.log(valid);
-
-    const validations = await Promise.all(validationsPromises);
-
-    console.log(validations);
-
-    const unvalid = validations?.find((validation) => validation !== undefined);
-    if (unvalid) {
-      message.error("Unvalid");
-    } else {
+    if (isValid) {
       if (current <= steps.length - 2) setCurrent(current + 1);
+    } else {
+      message.error("Unvalid");
     }
   }, [current]);
 
@@ -57,9 +52,9 @@ export const useCreateEventSteps = () => {
   const showDone = useMemo(() => current === steps.length - 1, [current]);
 
   const doneFunction = useCallback(async () => {
-    const errors = await formik.validateForm();
+    const { isValid } = await validateAndSubmitForm(formik);
 
-    if (Object.keys(errors).length === 0) {
+    if (isValid) {
       message.success("Valid!");
     } else {
       message.error("Errors!");

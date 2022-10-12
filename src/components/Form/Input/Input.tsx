@@ -1,7 +1,5 @@
 import classes from "./input.module.scss";
-import { Input as AntdInput, InputProps as AntdInputProps, FormItemProps } from "antd";
-import { useField, useFormikContext } from "formik";
-import { useMemo } from "react";
+import { Input as AntdInput, InputProps as AntdInputProps } from "antd";
 import { useAntdFormik } from "../../../hooks/useAntdFormik.hooks";
 
 export interface InputProps extends AntdInputProps {

@@ -1,8 +1,7 @@
 import classes from "./text-area.module.scss";
 
-import { Input as AntdInput, InputProps as AntdInputProps, FormItemProps } from "antd";
-import { useField, useFormikContext } from "formik";
-import { useMemo } from "react";
+import { Input as AntdInput } from "antd";
+
 import { useAntdFormik } from "../../../hooks/useAntdFormik.hooks";
 
 const { TextArea: AntdTextArea } = AntdInput;
